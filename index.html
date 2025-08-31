@@ -11,13 +11,14 @@
     .answer { padding: 8px; margin: 5px; border-radius: 5px; }
     .correct { background: #ff9999; }
     .wrong { background: #9999ff; }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
   <h2>クイズ参加</h2>
   <input id="serverInput" placeholder="サーバー番号"><br>
   <input id="nameInput" placeholder="名前"><br>
-  <button onclick="joinRoom()">参加</button>
+  <button id="joinButton" onclick="joinRoom()">参加</button>
 
   <div id="gameArea" style="display:none;">
     <h3 id="roomTitle"></h3>
@@ -46,6 +47,7 @@
       roomId = document.getElementById("serverInput").value.trim();
       playerName = document.getElementById("nameInput").value.trim();
       if (!roomId || !playerName) return alert("サーバー番号と名前を入力してください");
+      document.getElementById("joinButton").classList.add("hidden"); 
 
       const playersRef = db.ref(`rooms/${roomId}/players`);
       const newPlayerRef = playersRef.push();
